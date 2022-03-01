@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ColorTestSimple">
+        <annotations>
+            <stories value="NoNonsense"/>
+            <title value="Testing Color Buttons"/>
+            <description value="Testing color buttons on MFTF Test Page "/>
+            <severity value="AVERAGE"/>
+            <group value="mftf_page_test"/>
+        </annotations>
+        <before>
+            <magentoCLI stepKey="setProdMode" command="deploy:mode:set production" />
+        </before>
+        <after>
+            <magentoCLI stepKey="setDevMode" command="deploy:mode:set developer" />
+            <magentoCLI stepKey="cleanCache" command="cache:flush" />
+        </after>
+
+        <amOnPage url="mftf/test/index" stepKey="navigateToTestPage"/>
+        <waitForPageLoad stepKey="testPageWait"/>
+
+        <seeElement selector="#red" stepKey="redButtonVisible" />
+        <click stepKey="clickRedButton" selector="#red" after="redButtonVisible" />
+        <executeJS function="return document.body.style.backgroundColor === 'red'" stepKey="isBodyRed" />
+        <assertTrue stepKey="assertBodyIsRed" message="Red Button isn't working.">
+            <actualResult type="variable">isBodyRed</actualResult>
+        </assertTrue>
+
+        <seeElement selector="#blue" stepKey="blueButtonVisible" />
+        <click stepKey="clickBlueButton" selector="#blue" after="blueButtonVisible" />
+        <executeJS function="return document.body.style.backgroundColor === 'blue'" stepKey="isBodyBlue" />
+        <assertTrue stepKey="assertBodyIsBlue" message="Blue Button isn't working.">
+            <actualResult type="variable">isBodyBlue</actualResult>
+        </assertTrue>
+
+        <seeElement selector="#reset" stepKey="resetButtonVisible" />
+        <click stepKey="clickResetButton" selector="#reset" after="resetButtonVisible" />
+        <executeJS function="return document.body.style.backgroundColor === ''" stepKey="isBodyGeneric" />
+        <assertTrue stepKey="assertBodyIsGeneric" message="Reset Button isn't working.">
+            <actualResult type="variable">isBodyGeneric</actualResult>
+        </assertTrue>
+    </test>
+</tests>

@@ -1,0 +1,11 @@
+<p>It works!</p>
+<button id="red">Red</button>
+<button id="blue">Blue</button>
+<button id="reset">Reset</button>
+<script>
+    require(['jquery', 'domReady!'], function ($) {
+        $('#red').click(() => document.body.style.backgroundColor = 'red')
+        $('#blue').click(() => document.body.style.backgroundColor = 'blue');
+        $('#reset').click(() => document.body.style.backgroundColor = '');
+    })
+</script>

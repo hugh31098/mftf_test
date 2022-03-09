@@ -3,8 +3,9 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="ColorTestSimple">
         <annotations>
+            <testCaseId value="MAGENEST-100"/>
             <stories value="NoNonsense"/>
-            <title value="Testing Color Buttons"/>
+            <title value="Testing Color Buttons (Simplified)"/>
             <description value="Testing color buttons on MFTF Test Page "/>
             <severity value="AVERAGE"/>
             <group value="mftf_page_test"/>

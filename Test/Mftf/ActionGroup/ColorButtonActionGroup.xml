@@ -1,0 +1,19 @@
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="ColorButtonActionGroup">
+        <annotations>
+            <description>Click color button and check if body color change accordingly</description>
+        </annotations>
+        <arguments>
+            <argument name="selector" type="string"/>
+            <argument name="color" type="string"/>
+        </arguments>
+
+        <seeElement selector="{{selector}}" stepKey="buttonVisible" />
+        <click stepKey="clickButton" selector="{{selector}}" after="buttonVisible" />
+        <executeJS function="return document.body.style.backgroundColor === '{{color}}'" stepKey="colorCheck" />
+        <assertTrue stepKey="assertBodyColor" message="Testing Color: '{{color}}'">
+            <actualResult type="variable">colorCheck</actualResult>
+        </assertTrue>
+    </actionGroup>
+</actionGroups>

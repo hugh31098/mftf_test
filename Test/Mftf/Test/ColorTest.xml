@@ -3,6 +3,7 @@
        xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
     <test name="ColorTest">
         <annotations>
+            <testCaseId value="MAGENEST-101"/>
             <stories value="Nonsense"/>
             <title value="Testing Color Buttons"/>
             <description value="Testing color buttons on MFTF Test Page "/>
@@ -18,27 +19,21 @@
         </after>
 
         <amOnPage url="{{TestPage.url}}" stepKey="navigateToTestPage"/>
-        <waitForPageLoad stepKey="testPageWait"/>
 
-        <seeElement selector="{{TestPageColorSection.redButton}}" stepKey="redButtonVisible" />
-        <click stepKey="clickRedButton" selector="{{TestPageColorSection.redButton}}" after="redButtonVisible" />
-        <executeJS function="return document.body.style.backgroundColor === 'red'" stepKey="isBodyRed" />
-        <assertTrue stepKey="assertBodyIsRed" message="Red Button isn't working.">
-            <actualResult type="variable">isBodyRed</actualResult>
-        </assertTrue>
+        <actionGroup ref="ColorButtonActionGroup" stepKey="redCheck">
+            <argument name="selector" value="{{TestPageColorSection.redButton}}"/>
+            <argument name="color" value="red"/>
+        </actionGroup>
 
-        <seeElement selector="{{TestPageColorSection.blueButton}}" stepKey="blueButtonVisible" />
-        <click stepKey="clickBlueButton" selector="{{TestPageColorSection.blueButton}}" after="blueButtonVisible" />
-        <executeJS function="return document.body.style.backgroundColor === 'blue'" stepKey="isBodyBlue" />
-        <assertTrue stepKey="assertBodyIsBlue" message="Blue Button isn't working.">
-            <actualResult type="variable">isBodyBlue</actualResult>
-        </assertTrue>
+        <actionGroup ref="ColorButtonActionGroup" stepKey="blueCheck">
+            <argument name="selector" value="{{TestPageColorSection.blueButton}}"/>
+            <argument name="color" value="blue"/>
+        </actionGroup>
 
-        <seeElement selector="{{TestPageColorSection.resetButton}}" stepKey="resetButtonVisible" />
-        <click stepKey="clickResetButton" selector="{{TestPageColorSection.resetButton}}" after="resetButtonVisible" />
-        <executeJS function="return document.body.style.backgroundColor === ''" stepKey="isBodyGeneric" />
-        <assertTrue stepKey="assertBodyIsGeneric" message="Reset Button isn't working.">
-            <actualResult type="variable">isBodyGeneric</actualResult>
-        </assertTrue>
+        <actionGroup ref="ColorButtonActionGroup" stepKey="resetCheck">
+            <argument name="selector" value="{{TestPageColorSection.resetButton}}"/>
+            <argument name="color" value=""/>
+        </actionGroup>
+
     </test>
 </tests>
